@@ -6,33 +6,76 @@ class Calculator {
         this.clear();
     }
 
-// clear previous operand, current operand, and operator. 
+// clear previous operand, current operand, and operation. 
     clear() {
         this.currentOperand = '';
         this.previousOperand = '';
-        this.operator = undefined; 
+        this.operation = undefined; 
     }
 
 // backspace last input number
-    bksp() {}
+    bksp() {
+        this.currentOperand = this.currentOperand.toString().slice(0, -1);
+    }
 
 // add number to screen (transforms number parameter into string before concatting)
     appendNumber(number) {
-        if (number === '.' && this.currentOperand.includes('.')) {
-            return;
-        }
+        if (number === '.' && this.currentOperand.includes('.')) return;
         this.currentOperand = this.currentOperand.toString() + number.toString();
     }
 
-// get operator
-    getOperator(operator) {}
+// get operation
+    getOperation(operation) {
+        if (this.currentOperand === '') return;
+        if (this.previousOperand !== '') {
+            this.calculate();
+        }
+        this.operation = operation;
+        this.previousOperand = this.currentOperand;
+        this.currentOperand = '';
+    }
 
 // perform calculation
-   calculate() {}
+   calculate() {
+    let calculation;
+    const prev = parseFloat(this.previousOperand);
+    const current = parseFloat(this.currentOperand);
+    if (isNaN(prev) || isNaN(current)) return;
+    switch (this.operation) {
+        case '+':
+            calculation = prev + current;
+            break;
+        case '-':
+            calculation = prev - current;
+            break;
+        case '×':
+            calculation = prev * current;
+            break;
+        case '÷':
+            calculation = prev / current;
+            break;    
+        default:
+            return;
+    }
+    this.currentOperand = calculation;
+    this.operation = undefined;
+    this.previousOperand = '';
+   }
+
+// add comma separators
+   getCommas(number) {
+    const floatNumber = parseFloat(number);
+    if (isNaN(floatNumber)) return '';
+    return floatNumber.toLocaleString('en');
+   }
 
 // update screen area
     updateCalcArea() {
-        this.currentOperandText.innerText = this.currentOperand;
+        this.currentOperandText.innerText = this.getCommas(this.currentOperand);
+        if (this.operation != null) {
+            this.previousOperandText.innerText = 
+            `${this.getCommas(this.previousOperand)} ${this.operation}`;
+        }
     }
 }
 
@@ -57,59 +100,25 @@ numberButtons.forEach(button => {
 // create operation buttons
 operationButtons.forEach(button => {
     button.addEventListener('click', () => {
-        calculator.chooseOperation(button.innerText);
+        calculator.getOperation(button.innerText);
         calculator.updateCalcArea();
     })
 })
 
+// calculates
+equalsButton.addEventListener('click', () => {
+    calculator.calculate();
+    calculator.updateCalcArea();
+})
 
-/* 
-const add = function(a,b) {
-    return a + b;	
-  };
-  
-  const subtract = function(a,b) {
-    return a-b;
-  };
-  
-  const sum = function(array) {
-    const initialValue = 0;
-    const totalValue = array.reduce(
-      (accumulator, currentValue) => accumulator + currentValue, initialValue
-      );
-    return totalValue;
-  };
-  
-  const multiply = function(array) {
-    const totalValue = array.reduce((a, b) => a * b, 1)
-    return totalValue;
-  };
-  
-  const power = function(a,power) {
-      return a ** power;
-  };
-  
-  const factorial = function(a) {
-      // create array of number
-    const array = [];
-    for (let i = 1; i <= a; i++) {
-      array.push(i);
-    }
-    // factorializing with reduce
-    const initialValue = 1;
-    const totalValue = array.reduce(
-      (accumulator, currentValue) => accumulator * currentValue, initialValue
-    )
-    return totalValue;
-  };
-  
-  // Do not edit below this line
-  module.exports = {
-    add,
-    subtract,
-    sum,
-    multiply,
-    power,
-    factorial
-  };
-  */
+// clears all 
+clearButton.addEventListener('click', () => {
+    calculator.clear();
+    calculator.updateCalcArea();
+})
+
+// clears last entered digit
+bkspButton.addEventListener('click', () => {
+    calculator.bksp();
+    calculator.updateCalcArea();
+})
