@@ -1,0 +1,62 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 800;
+}
+
+.outer-container {
+    display: flex;
+    background-color: hsl(0,0%,85%);
+}
+
+.inner-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.keys {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 10px;
+    padding: 20px;
+}
+
+.key {
+    min-height: 60px;
+    min-width: 60px;
+    border-radius: 30px;
+    border: none;
+    background-color: hsl(0,0%,95%);
+    box-shadow: 0 4px 4px rgba(0,0,0,0.25), 0 0 5px 1px rgba(255,255,255,0.75), inset -5px 10px 1px rgba(48,95,107, 0.2);
+}
+
+.operand {
+    background-color: hsl(176,19%,63%);
+    box-shadow: 0 4px 4px rgba(0,0,0,0.25), 0 0 5px 1px rgba(255,255,255,0.75), inset -5px 10px 1px rgba(40,95,107, 0.2);
+}
+
+
+.key:hover {
+    background-color: hsl(0,0%,85%);
+}
+
+.operand:hover {
+    background-color: hsl(176,19%,53%);
+}
+
+.enter {
+    background-color: hsl(25,33%,65%);
+    grid-row: span 2;
+}
+
+.zero {
+    grid-column: span 2;
+}
