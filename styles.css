@@ -7,7 +7,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: Orbitron, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-weight: 800;
 }
 
@@ -33,24 +33,35 @@ body {
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-end;
-    background-color: hsl(30,30%,15%);
     margin: 12px 12px 0px;
     padding: 10px;
     min-height: 80px;
     border-radius: 20px;
-    box-shadow: inset -4px 4px 8px 2px hsla(0,0%,80%, 0.25), inset 5px -5px 5px 0px hsla(30,30%,10%, 0.75);
-    color: hsl(0,0%,85%);
+    box-shadow: 0 -2px 4px 4px hsla(0,0%,20%, 0.25), inset -4px 4px 8px 2px hsla(0,0%,80%, 0.25), inset 5px -5px 5px 0px hsla(30,30%,10%, 0.75);
+
+    background-color: hsl(30,30%,15%);
+    background: 
+    repeating-linear-gradient( 
+        90deg,
+        hsl(30,30%,15%), 
+        hsl(30,30%,15%) 10px, 
+        hsl(30,30%,11%) 10px, 
+        hsl(30,30%,11%) 11px
+    );
 }
 
 .previous-calc {
     font-size: 0.8em;
-    color: hsl(0,0%,75%);
+    color: hsl(0,0%,55%);
     padding: 0 10px;
+    text-shadow: 0px 0.5px 1px hsla(0,0%,80%, 0.5);
 }
 
 .current-calc {
     font-size: 1.6em;
+    color: hsl(0,0%,75%);
     padding: 0 10px;
+    text-shadow: 0px 1px 2px hsla(0,0%,80%, 0.5);
 }
 
 .keys {
@@ -68,25 +79,16 @@ body {
     border: none;
     background-color: hsl(0,0%,95%);
     box-shadow: 0 4px 4px rgba(0,0,0,0.25), 0 0 5px 1px rgba(255,255,255,0.75), inset -5px 10px 1px rgba(48,95,107, 0.2);
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: Orbitron, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-weight: 800;
     font-size: 1.2em;
     color: hsl(0,0%,45%);
-    text-shadow: 0px 1px 2px hsl(0,0%,40%);
+    text-shadow: 0px 1px 2px hsl(0,0%,50%);
 }
 
-.operand {
-    background-color: hsl(176,19%,63%);
+.operator {
+    background-color: hsl(176,19%,73%);
     box-shadow: 0 4px 4px rgba(0,0,0,0.25), 0 0 5px 1px rgba(255,255,255,0.75), inset -5px 10px 1px rgba(40,95,107, 0.2);
-}
-
-
-.key:hover {
-    background-color: hsl(0,0%,85%);
-}
-
-.operand:hover {
-    background-color: hsl(176,19%,53%);
 }
 
 .enter {
@@ -94,8 +96,25 @@ body {
     grid-row: span 2;
 }
 
+.del {
+    background-color: hsl(25,33%,65%);
+}
+
+
+.key:hover {
+    background-color: hsl(0,0%,85%);
+}
+
+.operator:hover {
+    background-color: hsl(176,19%,65%);
+}
+
 .enter:hover {
-    background-color: hsl(25,33%,55%)
+    background-color: hsl(25,33%,60%)
+}
+
+.del:hover {
+    background-color: hsl(25,33%,60%)
 }
 
 .zero {
