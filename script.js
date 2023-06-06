@@ -6,24 +6,31 @@ class Calculator {
         this.clear();
     }
 
- // clear previous operand, current operand, and operator. 
+// clear previous operand, current operand, and operator. 
     clear() {
         this.currentOperand = '';
         this.previousOperand = '';
         this.operator = undefined; 
     }
 
- //   bksp() {}
+// backspace last input number
+    bksp() {}
 
+// add number to screen (transforms number parameter into string before concatting)
     appendNumber(number) {
-        this.currentOperand = number;
-
+        if (number === '.' && this.currentOperand.includes('.')) {
+            return;
+        }
+        this.currentOperand = this.currentOperand.toString() + number.toString();
     }
 
-//    getOperator(operator) {}
+// get operator
+    getOperator(operator) {}
 
-//    calculate() {}
+// perform calculation
+   calculate() {}
 
+// update screen area
     updateCalcArea() {
         this.currentOperandText.innerText = this.currentOperand;
     }
@@ -39,6 +46,7 @@ const currentOperandText = document.querySelector('[data-current-operand]');
 
 const calculator = new Calculator(previousOperandText, currentOperandText);
 
+// create number buttons 0-9 and .
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
         calculator.appendNumber(button.innerText);
@@ -46,6 +54,13 @@ numberButtons.forEach(button => {
     })
 });
 
+// create operation buttons
+operationButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        calculator.chooseOperation(button.innerText);
+        calculator.updateCalcArea();
+    })
+})
 
 
 /* 
