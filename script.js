@@ -1,4 +1,4 @@
-
+// calculator constructor class
 class Calculator {
     constructor(previousOperandText, currentOperandText) {
         this.previousOperandText = previousOperandText;
@@ -64,9 +64,22 @@ class Calculator {
 
 // add comma separators
    getCommas(number) {
-    const floatNumber = parseFloat(number);
-    if (isNaN(floatNumber)) return '';
-    return floatNumber.toLocaleString('en');
+    const stringNumber = number.toString();
+    const intDigits = parseFloat(stringNumber.split('.')[0]);
+    const decDigits = stringNumber.split('.')[1];
+    let intDisplay;
+    if (isNaN(intDigits)) {
+        intDisplay = '';
+    } else {
+        intDisplay = intDigits.toLocaleString('en', { 
+            maximumFractionDigits: 0 
+        })
+    };
+    if (decDigits != null) {
+        return `${intDisplay}.${decDigits}`
+    } else {
+        return intDisplay;
+    }
    }
 
 // update screen area
@@ -75,10 +88,13 @@ class Calculator {
         if (this.operation != null) {
             this.previousOperandText.innerText = 
             `${this.getCommas(this.previousOperand)} ${this.operation}`;
+        } else {
+            this.previousOperandText.innerText = '';
         }
     }
 }
 
+// bring in buttons
 const numberButtons = document.querySelectorAll('[data-number]');
 const operationButtons = document.querySelectorAll('[data-operation]');
 const equalsButton = document.querySelector('[data-enter]');
@@ -87,6 +103,7 @@ const clearButton = document.querySelector('[data-clear]');
 const previousOperandText = document.querySelector('[data-previous-operand]');
 const currentOperandText = document.querySelector('[data-current-operand]');
 
+// new calc
 const calculator = new Calculator(previousOperandText, currentOperandText);
 
 // create number buttons 0-9 and .
